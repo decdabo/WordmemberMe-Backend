@@ -7,19 +7,20 @@ const OPTIONS = {
   algorithm: 'HS256',
 };
 
-export default {
-  generateToken: (object, options = OPTIONS) =>
-    new Promise((resolve, reject) => {
-      sign(object, JWT_SECRET, options, (error, payload) => {
-        if (error) return reject(error);
-        return resolve(payload);
-      });
-    }),
-  checkToken: (token) =>
-    new Promise((resolve, reject) => {
-      verify(token, JWT_SECRET, (error, payload) => {
-        if (error) return reject(error);
-        return resolve(payload);
-      });
-    }),
-};
+export const generateToken = (object, options = OPTIONS) => { 
+  new Promise((resolve, reject) => {
+    sign(object, JWT_SECRET, options, (error, payload) => {
+      if (error) return reject(error);
+      return resolve(payload);
+    });
+  })
+}
+  
+export const checkToken = (token) => {
+  new Promise((resolve, reject) => {
+    verify(token, JWT_SECRET, (error, payload) => {
+      if (error) return reject(error);
+      return resolve(payload);
+    });
+  })
+}
