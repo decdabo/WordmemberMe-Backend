@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 const { JWT_SECRET } = process.env;
 
 const OPTIONS = {
@@ -8,7 +10,7 @@ const OPTIONS = {
 };
 
 export const generateToken = (object, options = OPTIONS) => { 
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     jwt.sign(object, JWT_SECRET, options, (error, payload) => {
       if (error) return reject(error);
       return resolve(payload);
@@ -17,7 +19,7 @@ export const generateToken = (object, options = OPTIONS) => {
 }
   
 export const checkToken = (token) => {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     jwt.verify(token, JWT_SECRET, (error, payload) => {
       if (error) return reject(error);
       return resolve(payload);
