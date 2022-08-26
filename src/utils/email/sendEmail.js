@@ -1,6 +1,6 @@
 import { htmlEmail } from './htmlEmail.js';
 import { generateToken } from '../jwt.js';
-import emailTransport from './nodemailerConfig.js';
+import emailTransport from './config.js';
 
 
 export const sendEmail = async (email, id) => {
@@ -9,10 +9,9 @@ export const sendEmail = async (email, id) => {
       expiresIn: '24h',
       algorithm: 'HS256'
     });
+    const html = htmlEmail(`http://localhost:8080/api/verify/${token}`);
 
-    const html = htmlEmail(`http://localhost:8080/api/verify/${token}/${id}`);
-    await emailTransport(email, html);
-
+    return await emailTransport(email, html);
   } catch (error) {
     console.log(error);
   }
