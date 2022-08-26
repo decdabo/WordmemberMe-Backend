@@ -3,7 +3,7 @@ import { Card } from "../../models/Card.js";
 export const createCard = async(req, res) => {
   try {
     const { userId } = req.params;
-    const { word, meaning, quotesContext } = req.body;
+    const { word, meaning, quotesContext, email } = req.body;
     if (word) {
       const card = await Card.create({
         word,

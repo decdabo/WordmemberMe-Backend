@@ -4,7 +4,8 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 
 import authRouter from './routes/auth.routes.js';
-import cardsRouter from './routes/cards.routes.js'
+import cardsRouter from './routes/cards.routes.js';
+import verifyRouter from './routes/verify.routes.js';
 import { serverError, notFoundError } from './error/errors.js';
 // import sequelize from './database.js';
 
@@ -21,6 +22,7 @@ app.use([
 app.set('port', process.env.PORT || 8080);
 app.use(authRouter);
 app.use(cardsRouter);
+app.use(verifyRouter);
 app.use(notFoundError);
 app.use(serverError);
 

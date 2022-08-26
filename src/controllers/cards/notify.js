@@ -1,4 +1,3 @@
-import { sendEmail } from "../../utils/sendEmail";
 
 export const notify = ({ body, params }, res) => {
   try {
@@ -7,9 +6,9 @@ export const notify = ({ body, params }, res) => {
     if (isLerned <= 3) {
       setTimeout(() => {
         sendEmail(email, id);
-      }, 5000);
+      }, 20000);
       return res.json({
-        message: ''
+        message: 'Email sended!'
       })
     }
   } catch ({ message }) {
