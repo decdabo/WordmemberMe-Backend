@@ -1,7 +1,9 @@
+import * as dotenv from 'dotenv';
+
 import { htmlEmail } from './htmlEmail.js';
 import { generateToken } from '../jwt.js';
 import emailTransport from './config.js';
-
+dotenv.config();
 
 export const sendEmail = async (email, id) => {
   try {
@@ -9,7 +11,7 @@ export const sendEmail = async (email, id) => {
       expiresIn: '24h',
       algorithm: 'HS256'
     });
-    const html = htmlEmail(`http://localhost:8080/api/verify/${token}`);
+    const html = htmlEmail(`${process.env.FRONTEND_URL}/${token}/${id}/${email}`);
 
     return await emailTransport(email, html);
   } catch (error) {
